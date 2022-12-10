@@ -1,0 +1,22 @@
+<table class="table table-hover table-striped table-bordered">
+    <tbody>
+    <tr ng-repeat="match in matches | orderBy: 'kickoff'">
+        <td class="col-md-1">
+            <div><b>{{match.stage}}</b></div>
+            <div>{{match.kickoff | date : 'MMM d, HH:mm'}}</div>
+        </td>
+        <td class="col-md-2">
+            <h4><team data="match.homeTeam"/></h4>
+        </td>
+        <td class="col-md-1 text-center">
+            <h3>{{match.result.homeTeamGoals}} : {{match.result.awayTeamGoals}}</h3>
+        </td>
+        <td class="col-md-2">
+            <h4><team data="match.awayTeam"/></h4>
+        </td>
+        <td class="col-md-2 text-right" id="match-{{match.matchId}}-link">
+            <match-links data="match"/>
+        </td>
+    </tr>
+    </tbody>
+</table>
