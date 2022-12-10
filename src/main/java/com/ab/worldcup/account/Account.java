@@ -25,7 +25,7 @@ public class Account {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @JsonIgnore
+//    @JsonIgnore
     private String password;
 
     private String email;

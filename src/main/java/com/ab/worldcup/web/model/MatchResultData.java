@@ -1,7 +1,7 @@
 package com.ab.worldcup.web.model;
 
-import com.ab.worldcup.knockout.KnockoutMatchQualifier;
 import com.ab.worldcup.match.Stage;
+import com.ab.worldcup.knockout.KnockoutMatchQualifier;
 import lombok.Data;
 import org.springframework.validation.Errors;
 

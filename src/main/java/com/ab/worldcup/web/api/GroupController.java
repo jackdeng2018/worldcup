@@ -2,9 +2,9 @@ package com.ab.worldcup.web.api;
 
 import com.ab.worldcup.group.GroupService;
 import com.ab.worldcup.group.GroupStanding;
+import com.ab.worldcup.team.Group;
 import com.ab.worldcup.results.MatchResult;
 import com.ab.worldcup.results.ResultsService;
-import com.ab.worldcup.team.Group;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;

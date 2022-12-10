@@ -1,45 +1,49 @@
 <section id="ranking">
 
     <div class="jumbotron">
-        <h2>Ranking <small><a class="btn btn-link" ui-sref="rules">Rules</a></small></h2>
-        <p>Welcome to world cup 2018 betting competition:</p>
+        <h2>Ranking <small><a class="btn btn-link" ui-sref="rules">Welcome</a></small></h2>
+        <p>Top Scorers</p>
 
         <table class="table table-hover table-striped table-bordered">
             <thead>
             <tr>
                 <th>#</th>
-                <th>Rank</th>
-                <th scope="col">Username</th>
-                <th scope="col">Points</th>
+                <th scope="col">Name</th>
+                <th scope="col">Age</th>
+                <th scope="col">Position</th>
+                <th scope="col">Goal</th>
+                <th scope="col">Assist</th>
+                <th scope="col">Height</th>
+                <th scope="col">Weight</th>
+                <th scope="col">Nationality</th>
             </tr>
             </thead>
             <tbody>
             <tr ng-repeat="ranking in rankingData" ng-class="{'border_highlight': ranking.account.id === Account.id } ">
                 <td>{{$index+1}}</td>
                 <td>
-                    <span ng-show="ranking.rank < ranking.prevRank">
-                        <span>({{ranking.prevRank-ranking.rank}})</span>
-                        <span class="glyphicon glyphicon-arrow-up text-success"></span>
-                    </span>
-
-                    <span ng-show="ranking.rank > ranking.prevRank">
-                        <span>({{ranking.prevRank-ranking.rank}})</span>
-                        <span class="glyphicon glyphicon-arrow-down text-warning"></span>
-                    </span>
-
-                    <span><strong>{{ranking.rank}}</strong></span>
+                    <span><strong>{{ranking.name}}</strong></span>
                 </td>
                 <td>
-                    <img ng-src="{{ranking.account.profileImageUrl}}" style="max-height: 50px;"/>
-                    <span>{{ranking.account.fullName}}</span>
-                    <span ng-show="ranking.account.status=='ACTIVE'" class="glyphicon glyphicon-usd" aria-hidden="true"></span>
+                    <span>{{ranking.age}}</span>
                 </td>
                 <td>
-                    <span ng-show="ranking.points > ranking.prevPoints">
-                        (+{{ranking.points - ranking.prevPoints}})
-                    </span>
-
-                    <span><strong>{{ranking.points}}</strong></span>
+                    <span><strong>{{ranking.position}}</strong></span>
+                </td>
+                <td>
+                    <span>{{ranking.goal}}</span>
+                </td>
+                <td>
+                    <span>{{ranking.assist}}</span>
+                </td>
+                <td>
+                    <span>{{ranking.height}}</span>
+                </td>
+                <td>
+                    <span>{{ranking.weight}}</span>
+                </td>
+                <td>
+                    <span>{{ranking.nationality}}</span>
                 </td>
             </tr>
             </tbody>

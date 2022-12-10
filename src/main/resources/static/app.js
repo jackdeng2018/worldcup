@@ -85,7 +85,15 @@ app.config(function ($urlRouterProvider, $httpProvider, growlProvider) {
                 templateUrl: 'app/navbar/login.view.html'
             }
         }
-    });
+    }).state('register', {
+          parent: 'site',
+          url: "/register",
+          views: {
+              'content@': {
+                  templateUrl: 'app/navbar/register.html'
+              }
+          }
+      });
 
     // Teams
     $stateProvider.state('teams', {
@@ -142,48 +150,6 @@ app.config(function ($urlRouterProvider, $httpProvider, growlProvider) {
             'content@': {
                 templateUrl: 'app/admin/admin.view.html',
                 controller: 'adminCtrl'
-            }
-        }
-    });
-
-    // Bets
-    $stateProvider.state('bets', {
-        abstract: true,
-        parent: 'site'
-    }).state('bets.overview', {
-//        permissions: ['ROLE_USER'],
-        url: "/bets/overview",
-        views: {
-            'content@': {
-                templateUrl: 'app/bets/view/bets.overview.html',
-                controller: 'betsOverviewCtrl'
-            }
-        }
-     }).state('bets.groups', {
-//        permissions: ['ROLE_USER'],
-        url: "/bets/groups",
-        views: {
-            'content@': {
-                templateUrl: 'app/bets/view/bets.groups.view.html',
-                controller: 'betsGroupsCtrl'
-            }
-        }
-    }).state('bets.matches', {
-//        permissions: ['ROLE_USER'],
-        url: "/bets/matches?matchId",
-        views: {
-            'content@': {
-                templateUrl: 'app/bets/view/bets.matches.html',
-                controller: 'betsMatchesCtrl'
-            }
-        }
-    }).state('bets.qualifier', {
-//        permissions: ['ROLE_USER'],
-        url: "/bets/qualifier",
-        views: {
-            'content@': {
-                templateUrl: 'app/bets/view/bets.qualifier.html',
-                controller: 'betsQualifierCtrl'
             }
         }
     });

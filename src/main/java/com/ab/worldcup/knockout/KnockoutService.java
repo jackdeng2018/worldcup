@@ -3,11 +3,14 @@ package com.ab.worldcup.knockout;
 import com.ab.worldcup.group.GroupService;
 import com.ab.worldcup.group.GroupStanding;
 import com.ab.worldcup.group.TeamInGroup;
-import com.ab.worldcup.match.*;
-import com.ab.worldcup.results.ResultInterface;
+import com.ab.worldcup.match.KnockoutMatch;
+import com.ab.worldcup.match.KnockoutMatchRepository;
+import com.ab.worldcup.match.Match;
+import com.ab.worldcup.match.Stage;
 import com.ab.worldcup.team.Group;
 import com.ab.worldcup.team.KnockoutTeamCode;
 import com.ab.worldcup.team.Team;
+import com.ab.worldcup.results.ResultInterface;
 import com.google.common.collect.Iterables;
 import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,9 +21,6 @@ import java.util.*;
 import java.util.function.Function;
 import java.util.logging.Level;
 import java.util.stream.Collectors;
-
-import static com.ab.worldcup.team.KnockoutTeamCode.LOSER_SF1;
-import static com.ab.worldcup.team.KnockoutTeamCode.LOSER_SF2;
 
 @Log
 @Service
@@ -76,7 +76,7 @@ public class KnockoutService<T extends ResultInterface> {
             log.log(Level.FINE, "trying to calculate knockout match team for match ID " + matchId + " but match hasn't finished yet");
             return Optional.empty();
         } else {
-            if (LOSER_SF1.equals(teamCode) || LOSER_SF2.equals(teamCode)) {
+            if (KnockoutTeamCode.LOSER_SF1.equals(teamCode) || KnockoutTeamCode.LOSER_SF2.equals(teamCode)) {
                 // return match loser
                 return Optional.of(getKnockMatchLoser(matchResult.get()));
             } else {

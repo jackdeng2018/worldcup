@@ -1,9 +1,9 @@
 package com.ab.worldcup.group;
 
 
+import com.ab.worldcup.team.TeamRepository;
 import com.ab.worldcup.team.Group;
 import com.ab.worldcup.team.Team;
-import com.ab.worldcup.team.TeamRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;

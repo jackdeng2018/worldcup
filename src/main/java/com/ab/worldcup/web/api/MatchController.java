@@ -1,19 +1,18 @@
 package com.ab.worldcup.web.api;
 
 import com.ab.worldcup.group.GroupService;
-import com.ab.worldcup.knockout.KnockoutService;
 import com.ab.worldcup.match.GroupMatch;
 import com.ab.worldcup.match.KnockoutMatch;
 import com.ab.worldcup.match.Match;
 import com.ab.worldcup.match.MatchService;
+import com.ab.worldcup.web.model.MatchResultData;
+import com.ab.worldcup.web.model.MatchesData;
+import com.ab.worldcup.knockout.KnockoutService;
 import com.ab.worldcup.ranking.RankingService;
 import com.ab.worldcup.results.MatchResult;
 import com.ab.worldcup.results.ResultsService;
-import com.ab.worldcup.web.model.MatchResultData;
-import com.ab.worldcup.web.model.MatchesData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.Validator;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
@@ -80,7 +79,7 @@ public class MatchController {
         Match match = matchService.updateMatchResult(matchId, matchResultData);
         matchService.onMatchFinish(match);
         // trigger ranking creation - this is done async
-        rankingService.createRankingAsync(LocalDateTime.now());
+//        rankingService.createRankingAsync(LocalDateTime.now());
 
         return match;
     }

@@ -9,8 +9,6 @@ import lombok.ToString;
 
 import javax.persistence.*;
 
-import static com.ab.worldcup.knockout.KnockoutMatchQualifier.HOME_TEAM;
-
 @Entity
 @ToString
 @EqualsAndHashCode(of = {"matchId"})
@@ -42,6 +40,6 @@ public class MatchResult implements ResultInterface {
     @Override
     @JsonIgnore
     public Team getKnockoutQualifier() {
-        return HOME_TEAM.equals(getMatchQualifier()) ? getHomeTeam() : getAwayTeam();
+        return KnockoutMatchQualifier.HOME_TEAM.equals(getMatchQualifier()) ? getHomeTeam() : getAwayTeam();
     }
 }

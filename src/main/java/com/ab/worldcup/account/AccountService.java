@@ -110,4 +110,8 @@ public class AccountService implements UserDetailsService {
     public List<Account> getAllAccounts() {
         return accountRepository.findAll();
     }
+
+    public Account register(Account account) {
+        return accountRepository.save(account);
+    }
 }
