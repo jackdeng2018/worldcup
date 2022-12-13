@@ -1,4 +1,4 @@
-package com.ab.worldcup.signin;
+package com.ab.worldcup.account;
 
 import org.springframework.security.core.GrantedAuthority;
 

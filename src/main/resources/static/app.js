@@ -62,7 +62,7 @@ app.config(function ($urlRouterProvider, $httpProvider, growlProvider) {
     }).state('ranking', {
         parent: 'site',
         // Ranking - default view
-        url: '/',
+        url: '/rank',
         views: {
             'content@': {
                 templateUrl: 'app/ranking/ranking.view.html',
@@ -71,7 +71,7 @@ app.config(function ($urlRouterProvider, $httpProvider, growlProvider) {
         }
     }).state('rules', {
         parent: 'site',
-        url: '/rules',
+        url: '/',
         views: {
             'content@': {
                 templateUrl: 'app/rules/rules.view.html'

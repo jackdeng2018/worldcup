@@ -1,7 +1,7 @@
 package com.ab.worldcup.web.controllers;
 
 import com.ab.worldcup.account.Account;
-import com.ab.worldcup.signin.Role;
+import com.ab.worldcup.account.Role;
 import com.ab.worldcup.web.components.SessionManager;
 import com.ab.worldcup.web.model.HeartBeatData;
 import org.apache.commons.collections4.CollectionUtils;

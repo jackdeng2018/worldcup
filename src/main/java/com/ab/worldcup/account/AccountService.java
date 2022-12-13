@@ -1,7 +1,6 @@
 package com.ab.worldcup.account;
 
 import com.ab.worldcup.config.ApplicationConfig;
-import com.ab.worldcup.signin.Role;
 import com.google.common.collect.Sets;
 import org.brickred.socialauth.Profile;
 import org.springframework.beans.factory.annotation.Autowired;

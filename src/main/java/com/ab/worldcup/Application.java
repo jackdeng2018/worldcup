@@ -1,6 +1,5 @@
 package com.ab.worldcup;
 
-import com.ab.worldcup.signin.SocialAuthTemplate;
 import org.brickred.socialauth.SocialAuthConfig;
 import org.brickred.socialauth.SocialAuthManager;
 import org.springframework.boot.SpringApplication;
@@ -29,13 +28,6 @@ public class Application {
         SocialAuthConfig socialAuthConfig = new SocialAuthConfig();
         socialAuthConfig.setApplicationProperties(properties);
         return socialAuthConfig;
-    }
-
-
-    @Bean
-    @Scope(value = "session", proxyMode = ScopedProxyMode.TARGET_CLASS)
-    public SocialAuthTemplate SocialAuthTemplate() {
-        return new SocialAuthTemplate();
     }
 
     @Bean

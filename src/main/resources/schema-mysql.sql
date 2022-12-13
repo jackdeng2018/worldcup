@@ -1,3 +1,4 @@
+drop table if exists account;
 CREATE TABLE account (
   id              SERIAL PRIMARY KEY,
   email           varchar(20),
@@ -10,12 +11,13 @@ CREATE TABLE account (
   location        varchar(20),
   validatedId     varchar(20),
   profileImageUrl varchar(20),
-  providerId      varchar(20),
+  providerId      varchar(20) NOT NULL,
   country         varchar(20),
   language        varchar(20),
   status          varchar(20)
 );
 
+drop table if exists team;
 CREATE TABLE team (
   id              SERIAL PRIMARY KEY,
   name            varchar(20) UNIQUE,
@@ -23,16 +25,18 @@ CREATE TABLE team (
   fifaRanking     INT,
   appearances     INT,
   titles          INT,
-  confederation   varchar(20) NOT NULL,
+  confederation   varchar(40) NOT NULL,
   groupId         varchar(20) NOT NULL
 ) ENGINE = InnoDB;
 
+drop table if exists matches;
 CREATE TABLE matches (
   matchId         SERIAL PRIMARY KEY,
   kickoff         TIMESTAMP,
   status          varchar(20) NOT NULL DEFAULT 'SCHEDULED'
 ) ENGINE = InnoDB;
 
+drop table if exists group_match;
 CREATE TABLE group_match (
   matchId         INT PRIMARY KEY,
   homeTeam        INT,
@@ -40,6 +44,7 @@ CREATE TABLE group_match (
   groupId         varchar(20) NOT NULL
 ) ENGINE = InnoDB;
 
+drop table if exists knockout_match;
 CREATE TABLE knockout_match (
   matchId         INT PRIMARY KEY,
   matchCode       varchar(20) NOT NULL UNIQUE,
@@ -48,12 +53,14 @@ CREATE TABLE knockout_match (
   awayTeamCode    varchar(20) NOT NULL
 ) ENGINE = InnoDB;
 
+drop table if exists knockout_team;
 CREATE TABLE knockout_team (
   matchId         INT PRIMARY KEY,
   homeTeam        INT,
   awayTeam        INT
 ) ENGINE = InnoDB;
 
+drop table if exists match_result;
 CREATE TABLE match_result(
   matchId         INT PRIMARY KEY,
   homeTeam        INT ,
@@ -63,12 +70,7 @@ CREATE TABLE match_result(
   matchQualifier  varchar(20)
 ) ENGINE = InnoDB;
 
-CREATE TABLE qualifier(
-  knockoutTeamCode  varchar(20) PRIMARY KEY,
-  teamId            INT,
-  stageId           varchar(20) NOT NULL
-) ENGINE = InnoDB;
-
+drop table if exists ranking;
 CREATE TABLE ranking (
   id          SERIAL PRIMARY KEY,
   date        TIMESTAMP,
@@ -76,3 +78,5 @@ CREATE TABLE ranking (
   points      INT,
   CONSTRAINT no_duplicate_ranking UNIQUE (accountId, date)
 ) ENGINE = InnoDB;
+
+

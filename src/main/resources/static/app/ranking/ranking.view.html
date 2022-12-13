@@ -1,53 +1,52 @@
-<section id="ranking">
+<script src="js/jquery.min.js" type="text/javascript"></script>
+<script src="app/ranking/ranking.service.js" type="text/javascript"></script>
 
+<section id="ranking">
     <div class="jumbotron">
         <h2>Ranking <small><a class="btn btn-link" ui-sref="rules">Welcome</a></small></h2>
-        <p>Top Scorers</p>
-
-        <table class="table table-hover table-striped table-bordered">
+        <table id="tbl" class="table table-hover table-striped table-bordered">
             <thead>
             <tr>
                 <th>#</th>
-                <th scope="col">Name</th>
-                <th scope="col">Age</th>
-                <th scope="col">Position</th>
-                <th scope="col">Goal</th>
-                <th scope="col">Assist</th>
-                <th scope="col">Height</th>
-                <th scope="col">Weight</th>
-                <th scope="col">Nationality</th>
+                <th scope="col"><button onclick="refreshTable('name')">Name</button></th>
+                <th scope="col"><button onclick="refreshTable('age')">Age</button></th>
+                <th scope="col"><button onclick="refreshTable('position')">Position</button></th>
+                <th scope="col"><button onclick="refreshTable('goal')">Goal</button></th>
+                <th scope="col"><button onclick="refreshTable('assist')">Assist</button></th>
+                <th scope="col"><button onclick="refreshTable('height')">Height</button></th>
+                <th scope="col"><button onclick="refreshTable('weight')">Weight</button></th>
+                <th scope="col"><button onclick="refreshTable('nationality')">Nationality</button></th>
             </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="ranking in rankingData" ng-class="{'border_highlight': ranking.account.id === Account.id } ">
+            <tr ng-repeat="ranking in rankingData">
                 <td>{{$index+1}}</td>
                 <td>
-                    <span><strong>{{ranking.name}}</strong></span>
+                    {{ranking.name}}
                 </td>
                 <td>
-                    <span>{{ranking.age}}</span>
+                    {{ranking.age}}
                 </td>
                 <td>
-                    <span><strong>{{ranking.position}}</strong></span>
+                    {{ranking.position}}
                 </td>
                 <td>
-                    <span>{{ranking.goal}}</span>
+                    {{ranking.goal}}
                 </td>
                 <td>
-                    <span>{{ranking.assist}}</span>
+                    {{ranking.assist}}
                 </td>
                 <td>
-                    <span>{{ranking.height}}</span>
+                    {{ranking.height}}
                 </td>
                 <td>
-                    <span>{{ranking.weight}}</span>
+                    {{ranking.weight}}
                 </td>
                 <td>
-                    <span>{{ranking.nationality}}</span>
+                    {{ranking.nationality}}
                 </td>
             </tr>
             </tbody>
         </table>
     </div>
-
 </section>
