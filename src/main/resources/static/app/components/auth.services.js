@@ -57,7 +57,6 @@ angular.module('worldcup').factory('Auth', function ($rootScope, $state, $http, 
             }
 
         });
-        // start polling
         heartBeat();
     };
 

@@ -33,6 +33,9 @@
         <button class="btn green" id="login" type="submit">
             login
         </button>
+        <button class="btn blue" id="logout" type="submit">
+            logout
+        </button>
         <button class="btn blue" id="register" type="submit">
             register
         </button>
@@ -66,11 +69,36 @@
                     withCredentials: true
                 },
                 success: function(data) {
-                    if (data.status == "success") {
+                    if (data == "success") {
                         alert("登录成功");
-                        window.location.href = "listitem.html";
+                        window.location.href = "index.html";
+                    } else if (data = "repeat"){
+                        alert("you have logined in, do not login multiple times")
                     } else {
-                        alert("登录失败，失败原因为" + data.data.errMsg);
+                        alert("login failed, please check your account or password");
+                    }
+                },
+                error: function() {
+                    alert("发送失败，失败原因为" + data.responseText);
+                }
+            });
+            return false;
+        }),
+        $("#logout").on("click", function() {
+            $.ajax({
+                type: "POST",
+                url: "http://localhost:8080/api/account/logout",
+                data: {
+
+                },
+                xhrFields: {
+                    withCredentials: true
+                },
+                success: function(data) {
+                    if (data == "success") {
+                        alert("logout success");
+                    } else {
+                        alert("logout failed, please check if you have logined");
                     }
                 },
                 error: function() {

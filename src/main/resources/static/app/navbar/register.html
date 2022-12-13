@@ -100,10 +100,10 @@
                     withCredentials: true
                 },
                 success: function(data) {
-                    if (data.status == "success") {
+                    if (data == "success") {
                         alert("注册成功");
                     } else {
-                        alert("注册失败，失败原因为" + data.data.errMsg);
+                        alert("注册失败，失败原因为" + data);
                     }
                 },
                 error: function() {

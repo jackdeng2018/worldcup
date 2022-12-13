@@ -48,15 +48,6 @@ CREATE TABLE knockout_match (
   awayTeamCode    varchar(20) NOT NULL
 ) ENGINE = InnoDB;
 
---CREATE TABLE bet (
---  id          SERIAL PRIMARY KEY,
---  description varchar(20) NOT NULL,
---  type        varchar(20) NOT NULL,
---  matchId     INT,
---  stageId     varchar(20) NOT NULL,
---  lockTime   TIMESTAMP NOT NULL
---) ENGINE = InnoDB;
-
 CREATE TABLE knockout_team (
   matchId         INT PRIMARY KEY,
   homeTeam        INT,
@@ -71,19 +62,6 @@ CREATE TABLE match_result(
   awayTeamGoals   INT,
   matchQualifier  varchar(20)
 ) ENGINE = InnoDB;
-
---CREATE TABLE user_bet(
---  accountId         INT,
---  betId             INT,
---  homeTeam          INT,
---  awayTeam          INT,
---  homeTeamGoals     INT,
---  awayTeamGoals     INT,
---  qualifier         INT,
---  knockoutTeamCode  varchar(20),
---  PRIMARY KEY(accountId, betId),
---  CONSTRAINT no_duplicate_bet UNIQUE (accountId, betId)
---) ENGINE = InnoDB;
 
 CREATE TABLE qualifier(
   knockoutTeamCode  varchar(20) PRIMARY KEY,

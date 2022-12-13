@@ -5,6 +5,7 @@ import com.ab.worldcup.account.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.util.Pair;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.security.core.Authentication;
@@ -12,6 +13,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @RestController
@@ -32,17 +34,18 @@ public class AccountController {
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     @ResponseBody
-    public Account login(@RequestParam(name = "email") String email,
-                                @RequestParam(name = "password") String password) {
-
-//        Pair<String,User> token = userService.authenticateUser(username, password);
-        HttpHeaders responseHeaders = new HttpHeaders();
-//        responseHeaders.set("token", token.getFirst());
-//        User user = token.getSecond();
-
-//        this.httpServletRequest.getSession().setAttribute("IS_LOGIN",true);
-//        this.httpServletRequest.getSession().setAttribute("LOGIN_USER",userModel);
-        return accountService.findAccountByEmail(email);
+    public String login(@RequestParam(name = "email") String email,
+                         @RequestParam(name = "password") String password,
+                         HttpServletRequest request) {
+        if (request.getSession() != null && request.getSession().getAttribute("isLogin") != null) {
+            return "repeat";
+        }
+        Account account = accountService.findAccountByEmail(email);
+        if (account != null && password.equals(account.getPassword())) {
+            request.getSession().setAttribute("isLogin",true);
+            return "success";
+        }
+        return "login failed";
     }
 
     @RequestMapping(value = "/identity", produces = {MediaType.APPLICATION_JSON_VALUE}, method = RequestMethod.GET)
@@ -61,6 +64,16 @@ public class AccountController {
         return account;
     }
 
+
+    @RequestMapping(value = "/logout", method = RequestMethod.POST)
+    @ResponseBody
+    public String logout(HttpServletRequest request) {
+        if (request.getSession() != null && request.getSession().getAttribute("isLogin") != null) {
+            request.getSession().removeAttribute("isLogin");
+            return "success";
+        }
+        return "failed";
+    }
     // ~ ===============================  ADMIN ONLY ==========================
 
 //    @PreAuthorize("hasRole('ROLE_ADMIN')")

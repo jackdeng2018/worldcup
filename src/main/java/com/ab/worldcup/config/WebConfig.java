@@ -18,6 +18,6 @@ public class WebConfig extends WebMvcConfigurerAdapter {
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(getSessionManager())
                 .addPathPatterns("/**")
-                .excludePathPatterns("/resources/**", "/api/heartbeat");
+                .excludePathPatterns("/resources/**", "/api/heartbeat", "/api/account/login", "/api/account/register");
     }
 }
