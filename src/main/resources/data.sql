@@ -1,3 +1,85 @@
+drop table if exists account;
+CREATE TABLE account (
+  id              SERIAL PRIMARY KEY,
+  email           varchar(20),
+  password        varchar(20) NOT NULL,
+  firstName       varchar(20),
+  lastName        varchar(20),
+  fullName        varchar(20),
+  displayName     varchar(20),
+  gender          varchar(20),
+  location        varchar(20),
+  validatedId     varchar(20),
+  profileImageUrl varchar(20),
+  providerId      varchar(20) NOT NULL,
+  country         varchar(20),
+  language        varchar(20),
+  status          varchar(20)
+);
+
+drop table if exists team;
+CREATE TABLE team (
+  id              SERIAL PRIMARY KEY,
+  name            varchar(20) UNIQUE,
+  code            varchar(20) UNIQUE,
+  fifaRanking     INT,
+  appearances     INT,
+  titles          INT,
+  confederation   varchar(40) NOT NULL,
+  groupId         varchar(20) NOT NULL
+) ENGINE = InnoDB;
+
+drop table if exists matches;
+CREATE TABLE matches (
+  matchId         SERIAL PRIMARY KEY,
+  kickoff         TIMESTAMP,
+  status          varchar(20) NOT NULL DEFAULT 'SCHEDULED'
+) ENGINE = InnoDB;
+
+drop table if exists group_match;
+CREATE TABLE group_match (
+  matchId         INT PRIMARY KEY,
+  homeTeam        INT,
+  awayTeam        INT,
+  groupId         varchar(20) NOT NULL
+) ENGINE = InnoDB;
+
+drop table if exists knockout_match;
+CREATE TABLE knockout_match (
+  matchId         INT PRIMARY KEY,
+  matchCode       varchar(20) NOT NULL UNIQUE,
+  stageId         varchar(20) NOT NULL,
+  homeTeamCode    varchar(20) NOT NULL,
+  awayTeamCode    varchar(20) NOT NULL
+) ENGINE = InnoDB;
+
+drop table if exists knockout_team;
+CREATE TABLE knockout_team (
+  matchId         INT PRIMARY KEY,
+  homeTeam        INT,
+  awayTeam        INT
+) ENGINE = InnoDB;
+
+drop table if exists match_result;
+CREATE TABLE match_result(
+  matchId         INT PRIMARY KEY,
+  homeTeam        INT ,
+  awayTeam        INT ,
+  homeTeamGoals   INT,
+  awayTeamGoals   INT,
+  matchQualifier  varchar(20)
+) ENGINE = InnoDB;
+
+drop table if exists ranking;
+CREATE TABLE ranking (
+  id          SERIAL PRIMARY KEY,
+  date        TIMESTAMP,
+  accountId   INT,
+  points      INT,
+  CONSTRAINT no_duplicate_ranking UNIQUE (accountId, date)
+) ENGINE = InnoDB;
+
+
 
 INSERT INTO matches (matchId, kickoff) VALUES
   (1, '2022-11-14 15:00:00'),
@@ -66,6 +148,9 @@ INSERT INTO matches (matchId, kickoff) VALUES
   (64, '2022-12-15 15:00:00');
 
 
+
+
+drop table if exists team;
 CREATE TABLE team (
   id              SERIAL PRIMARY KEY,
   name            varchar(20) UNIQUE,
@@ -73,8 +158,26 @@ CREATE TABLE team (
   fifaRanking     INT,
   appearances     INT,
   titles          INT,
-  confederation   varchar(20) NOT NULL,
+  confederation   varchar(40) NOT NULL,
   groupId         varchar(20) NOT NULL
+) ENGINE = InnoDB;
+
+drop table if exists group_match;
+CREATE TABLE group_match (
+  matchId         INT PRIMARY KEY,
+  homeTeam        INT,
+  awayTeam        INT,
+  groupId         varchar(20) NOT NULL
+) ENGINE = InnoDB;
+
+drop table if exists match_result;
+CREATE TABLE match_result(
+  matchId         INT PRIMARY KEY,
+  homeTeam        INT ,
+  awayTeam        INT ,
+  homeTeamGoals   INT,
+  awayTeamGoals   INT,
+  matchQualifier  varchar(20)
 ) ENGINE = InnoDB;
 
 INSERT INTO team (id, name, code, appearances, titles, fifaRanking, confederation, groupId) VALUES
@@ -90,7 +193,7 @@ INSERT INTO team (id, name, code, appearances, titles, fifaRanking, confederatio
   (8, 'KOREA REPUBLIC', 'kor', 11 , 0, 29, 'ASIA', 'H'),
   (9, 'JAPAN', 'jpn', 7 , 0, 23, 'ASIA', 'E'),
   (10, 'SAUDI ARABIA', 'ksa', 6 , 0, 49, 'ASIA', 'C'),
-  (11, 'AUSTRALIA', 'aus', 6, 0, 42, 'AISA', 'D'),
+  (11, 'AUSTRALIA', 'aus', 6, 0, 42, 'ASIA', 'D'),
   -- Europe
   (12, 'GERMANY', 'ger', 20 , 4, 12, 'EUROPE', 'E'),
   (13, 'DENMARK', 'den', 6, 0, 11, 'EUROPE', 'D'),
@@ -116,8 +219,7 @@ INSERT INTO team (id, name, code, appearances, titles, fifaRanking, confederatio
   (31, 'ECUADOR', 'ecu', 4, 0, 46, 'SOUTH_AMERICA', 'A'),
   (32, 'URUGUAY', 'uru', 14 , 2, 13, 'SOUTH_AMERICA', 'H');
 
-
-INSERT INTO group_match (matchId, homeTeam, awayTeam, groupId) VALUES
+  INSERT INTO group_match (matchId, homeTeam, awayTeam, groupId) VALUES
   (1, 6, 31, 'A'),
   (2, 2, 21, 'A'),
   (3, 19, 7, 'B'),
@@ -167,56 +269,55 @@ INSERT INTO group_match (matchId, homeTeam, awayTeam, groupId) VALUES
   (47, 18, 20, 'G'),
   (48, 5, 29, 'G');
 
-
-INSERT INTO group_match (matchId, homeTeam, awayTeam, groupId) VALUES
-  (1, 20, 10, 'A'),
-  (2, 1, 32, 'A'),
-  (3, 2, 7, 'B'),
-  (4, 19, 22, 'B'),
-  (5, 15, 6, 'C'),
-  (6, 28, 17, 'D'),
-  (7, 31, 13, 'C'),
-  (8, 12, 3, 'D'),
-  (9, 25, 21, 'E'),
-  (10, 16, 26, 'F'),
-  (11, 29, 24, 'E'),
-  (12, 23, 9, 'F'),
-  (13, 11, 27, 'G'),
-  (14, 5, 14, 'G'),
-  (15, 30, 8, 'H'),
-  (16, 18, 4, 'H'),
-  (17, 20, 1, 'A'),
-  (18, 19, 2, 'B'),
-  (19, 32, 10, 'A'),
-  (20, 7, 22, 'B'),
-  (21, 13, 6, 'C'),
-  (22, 15, 31, 'C'),
-  (23, 28, 12, 'D'),
-  (24, 29, 25, 'E'),
-  (25, 3, 17, 'D'),
-  (26, 21, 24, 'E'),
-  (27, 11, 5, 'G'),
-  (28, 9, 26, 'F'),
-  (29, 16, 23, 'F'),
-  (30, 14, 27, 'G'),
-  (31, 8, 4, 'H'),
-  (32, 18, 30, 'H'),
-  (33, 32, 20, 'A'),
-  (34, 10, 1, 'A'),
-  (35, 7, 19, 'B'),
-  (36, 22, 2, 'B'),
-  (37, 13, 15, 'C'),
-  (38, 6, 31, 'C'),
-  (39, 3, 28, 'D'),
-  (40, 17, 12, 'D'),
-  (41, 9, 16, 'F'),
-  (42, 26, 23, 'F'),
-  (43, 21, 29, 'E'),
-  (44, 24, 25, 'E'),
-  (45, 8, 18, 'H'),
-  (46, 4, 30, 'H'),
-  (47, 27, 5, 'G'),
-  (48, 14, 11, 'G');
+  INSERT INTO match_result (matchId, homeTeam, awayTeam, homeTeamGoals, awayTeamGoals) VALUES
+  (1, 6, 31, 0, 2),
+  (2, 2, 21, 0, 2),
+  (3, 19, 7, 6, 2),
+  (4, 26, 24, 1, 1),
+  (5, 14, 11, 4, 1),
+  (6, 13, 3, 0, 0),
+  (7, 27, 23, 0, 0),
+  (8, 30, 10, 1, 2),
+  (9, 15, 25, 1, 0),
+  (10, 17, 28, 7, 0),
+  (11, 12, 9, 1, 2),
+  (12, 4, 16, 0, 0),
+  (13, 20, 5, 1, 0),
+  (14, 32, 8, 0, 0),
+  (15, 22, 1, 3, 2),
+  (16, 29, 18, 2, 0),
+  (17, 24, 7, 0, 2),
+  (18, 6, 2, 1, 3),
+  (19, 21, 31, 1, 1),
+  (20, 19, 26, 0, 0),
+  (21, 3, 11, 0, 1),
+  (22, 23, 10, 2, 0),
+  (23, 14, 13, 2, 1),
+  (24, 30, 27, 2, 0),
+  (25, 9, 28, 0, 1),
+  (26, 15, 4, 0, 2),
+  (27, 16, 25, 4, 1),
+  (28, 17, 12, 1, 1),
+  (29, 5, 18, 3, 3),
+  (30, 8, 1, 2, 3),
+  (31, 29, 20, 1, 0),
+  (32, 23, 32, 2, 0),
+  (33, 24, 19, 0, 3),
+  (34, 7, 26, 0, 1),
+  (35, 31, 2, 1, 2),
+  (36, 21, 6, 2, 0),
+  (37, 11, 13, 1, 0),
+  (38, 3, 14, 1, 0),
+  (39, 23, 30, 1, 2),
+  (40, 10, 27, 0, 2),
+  (41, 16, 15, 0, 0),
+  (42, 25, 4, 1, 2),
+  (43, 9, 17, 2, 1),
+  (44, 28, 12, 2, 4),
+  (45, 1, 32, 0, 2),
+  (46, 8, 22, 2, 1),
+  (47, 18, 20, 2, 3),
+  (48, 5, 29, 1, 0);
 
 INSERT INTO knockout_match(matchId, matchCode, stageId, homeTeamCode, awayTeamCode) VALUES
   (49, 'ROS1', 'ROUND_OF_16', 'WINNER_GROUP_C', 'RUNNER_UP_GROUP_D'),
@@ -239,55 +340,3 @@ INSERT INTO knockout_match(matchId, matchCode, stageId, homeTeamCode, awayTeamCo
 
 insert into account (id, password, email, providerId, displayName) values
   (1,'1', '1@gmail.com','googleplus', 'TestItay');
---
-
-
-INSERT INTO match_result (matchId, homeTeam, awayTeam, homeTeamGoals, awayTeamGoals) VALUES
-  (1, 20, 10, 2, 1),
-  (2, 1, 32, 1, 1),
-  (3, 2, 7, 3, 0),
-  (4, 19, 22, 1, 2),
-  (5, 15, 6,  1, 3),
-  (6, 28, 17,  0, 0),
-  (7, 31, 13, 0, 1),
-  (8, 12, 3, 1, 2),
-  (9, 25, 21, 2, 0),
-  (10, 16, 26, 1, 0),
-  (11, 29, 24, 3, 2),
-  (12, 23, 9, 1, 1),
-  (13, 11, 27, 0, 0),
-  (14, 5, 14, 0, 2),
-  (15, 30, 8, 1, 2),
-  (16, 18, 4, 2, 0),
-  (17, 20, 1, 2, 2),
-  (18, 19, 2, 3, 3),
-  (19, 32, 10, 2, 1),
-  (20, 7, 22, 3, 0),
-  (21, 13, 6, 2, 0),
-  (22, 15, 31, 0, 1),
-  (23, 28, 12, 1, 2),
-  (24, 29, 25, 2, 2),
-  (25, 3, 17, 1, 1),
-  (26, 21, 24, 0, 1),
-  (27, 11, 5, 2, 1),
-  (28, 9, 26, 2, 1),
-  (29, 16, 23, 0, 0),
-  (30, 14, 27, 2, 2),
-  (31, 8, 4, 1, 3),
-  (32, 18, 30, 0, 3),
-  (33, 32, 20, 2, 0),
-  (34, 10, 1, 1, 0),
-  (35, 7, 19, 2, 1),
-  (36, 22, 2,  2, 2),
-  (37, 13, 15,  2, 4),
-  (38, 6, 31, 1, 4),
-  (39, 3, 28, 0, 0),
-  (40, 17, 12, 2, 1),
-  (41, 9, 16, 1, 0),
-  (42, 26, 23, 1, 1),
-  (43, 21, 29, 2, 0),
-  (44, 24, 25, 1, 3),
-  (45, 8, 18, 0, 3),
-  (46, 4, 30, 2, 3),
-  (47, 27, 5, 3, 3),
-  (48, 14, 11, 2, 1);
