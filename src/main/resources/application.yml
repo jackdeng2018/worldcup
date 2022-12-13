@@ -6,7 +6,7 @@ spring:
     name: world-cup
   datasource:
 #    url: jdbc:mysql://localhost:3366/sdsc5003?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true&autoReconnect=true&useSSL=false&verifyServerCertificate=false
-    url: jdbc:mysql://localhost:3306/sdsc1?serverTimezone=UTC&useUnicode=true&characterEncoding=utf8&useSSL=false
+    url: jdbc:mysql://localhost:3306/sdsc5003?serverTimezone=UTC&useUnicode=true&characterEncoding=utf8&useSSL=false
     username: root
     password: root
     driver-class-name: com.mysql.jdbc.Driver
