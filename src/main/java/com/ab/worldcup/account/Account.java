@@ -30,13 +30,7 @@ public class Account {
 
     private String email;
 
-    private String firstName;
-
-    private String lastName;
-
     private String fullName;
-
-    private String displayName;
 
     private String gender;
 
@@ -45,10 +39,6 @@ public class Account {
 
     @JsonIgnore
     private String validatedId;
-
-    private String profileImageUrl;
-
-    private String providerId;
 
     private String country;
 

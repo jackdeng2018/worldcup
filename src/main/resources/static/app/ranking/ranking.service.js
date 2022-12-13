@@ -19,7 +19,6 @@ var refreshTable = function(filter) {
             // Populate the table with the new data
             var data = query(filter);
             var index = 0;
-            debugger
             for (const item of data) {
                 index += 1
             $('#tbl tbody').append(

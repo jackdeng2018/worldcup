@@ -37,7 +37,11 @@ public class AccountController {
     public String login(@RequestParam(name = "email") String email,
                          @RequestParam(name = "password") String password,
                          HttpServletRequest request) {
-        if (request.getSession() != null && request.getSession().getAttribute("isLogin") != null) {
+        if (request.getSession() == null) {
+            return "failed";
+        }
+        Object login = request.getSession().getAttribute("isLogin");
+        if ((login != null && (boolean) login)) {
             return "repeat";
         }
         Account account = accountService.findAccountByEmail(email);

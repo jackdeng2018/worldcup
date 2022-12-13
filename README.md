@@ -1,15 +1,16 @@
 # world-cup
 
-World Cup Betting application
+FIFA World Cup application
 
 ## Motivation
 
-Web application to follow and manage bets for the FIFA 2018 World cup games.
+Web application to follow the FIFA 2022 World cup games.
 
 ## Installation
+if you want to direct use the application
+please set default schema:sdsc5003, default username/password = root/root
 
-mvn install
+if you want to install on your own,
+the config is in the application.yml, you can change to your own mysql url
+and then use command: mvn install
 
-## License
-
-The default license used for  Projects is the MIT License.
