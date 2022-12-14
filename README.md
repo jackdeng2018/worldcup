@@ -1,10 +1,1 @@
-# world-cup
-
-World Cup application
-
-## Motivation
-
-
-## Installation
-
-mvn install
+main data -> branch1
