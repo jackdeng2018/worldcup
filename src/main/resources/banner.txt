@@ -1,5 +1,6 @@
 
 ---------------------------------------------------
+    FIFA WorldCup
 
    ${spring.application.name} (${server.port})
 

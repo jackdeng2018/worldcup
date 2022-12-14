@@ -8,10 +8,6 @@ import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.support.PropertiesLoaderUtils;
-
-import java.util.Properties;
 
 @SpringBootApplication(scanBasePackages = "com.sdsc5003.worldcup")
 @EnableCaching
@@ -19,15 +15,6 @@ public class Application {
 
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
-    }
-
-    @Bean
-    public SocialAuthConfig socialAuthConfig() throws Exception {
-        Properties properties = PropertiesLoaderUtils.loadProperties(new ClassPathResource("oauth_consumer.properties"));
-
-        SocialAuthConfig socialAuthConfig = new SocialAuthConfig();
-        socialAuthConfig.setApplicationProperties(properties);
-        return socialAuthConfig;
     }
 
     @Bean

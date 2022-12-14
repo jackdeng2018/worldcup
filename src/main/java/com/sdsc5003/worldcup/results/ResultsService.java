@@ -23,18 +23,6 @@ public class ResultsService {
     @Autowired
     private KnockoutTeamRepository knockoutTeamRepository;
 
-    private BetCorrectnessTypeEnum isQualifierDetermined(boolean correctQualifier, Stage stage) {
-        if (correctQualifier) {
-            return BetCorrectnessTypeEnum.True;
-        } else {
-            List<Qualifier> qualifierForStage = qualifierRepository.findByStageId(stage);
-            if (qualifierForStage != null && qualifierForStage.size() == stage.getNumberOfQualifiersForStage()) {
-                return BetCorrectnessTypeEnum.False;
-            }
-            return BetCorrectnessTypeEnum.Not_Yet_Determined;
-        }
-    }
-
     @CacheEvict(value = "allMatchResultsCache", allEntries = true)
     public MatchResult save(MatchResult result) {
         return matchResultRepository.save(result);
