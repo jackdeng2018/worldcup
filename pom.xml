@@ -51,11 +51,11 @@
         </dependency>
 
         <!-- for social connection -->
-        <dependency>
-            <groupId>org.brickred</groupId>
-            <artifactId>socialauth</artifactId>
-            <version>4.14</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.brickred</groupId>-->
+<!--            <artifactId>socialauth</artifactId>-->
+<!--            <version>4.14</version>-->
+<!--        </dependency>-->
 
         <dependency>
             <groupId>org.projectlombok</groupId>
