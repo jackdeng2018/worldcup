@@ -1910,7 +1910,7 @@ INSERT INTO team (id, name, code, appearances, titles, fifaRanking, confederatio
   (29, 5, 18, 'G'),
   (30, 8, 1, 'H'),
   (31, 29, 20, 'G'),
-  (32, 23, 32, 'H'),
+  (32, 22, 32, 'H'),
   (33, 24, 19, 'B'),
   (34, 7, 26, 'B'),
   (35, 31, 2, 'A'),
