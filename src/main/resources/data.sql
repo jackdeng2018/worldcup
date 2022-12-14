@@ -72,15 +72,6 @@ CREATE TABLE match_result(
   matchQualifier  varchar(20)
 ) ENGINE = InnoDB;
 
-drop table if exists ranking;
-CREATE TABLE ranking (
-  id          SERIAL PRIMARY KEY,
-  date        TIMESTAMP,
-  accountId   INT,
-  points      INT,
-  CONSTRAINT no_duplicate_ranking UNIQUE (accountId, date)
-) ENGINE = InnoDB;
-
 drop table if exists team;
 CREATE TABLE team (
   id              SERIAL PRIMARY KEY,

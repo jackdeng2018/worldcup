@@ -25,12 +25,17 @@ public class RankingService {
             }
             if (filter.equals("age")) {
                 allPlayers = allPlayers.stream()
-                        .sorted(Comparator.comparing(Player::getAge))
+                        .sorted(Comparator.comparing(Player::getAge).reversed())
                         .collect(Collectors.toList());
             }
             if (filter.equals("height")) {
                 allPlayers = allPlayers.stream()
                         .sorted(Comparator.comparing(Player::getHeight).reversed())
+                        .collect(Collectors.toList());
+            }
+            if (filter.equals("position")) {
+                allPlayers = allPlayers.stream()
+                        .sorted(Comparator.comparing(Player::getPosition))
                         .collect(Collectors.toList());
             }
             if (filter.equals("name")) {

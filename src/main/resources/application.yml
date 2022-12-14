@@ -16,23 +16,7 @@ spring:
 #      ddl-auto: create-drop
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
-#    properties:
-#      hibernate:
-#        order_updates: true
-#        order_inserts: true
-#        jdbc:
-#          batch_size: 200
-#          batch_versioned_data: true
     show-sql: true
-
-#  h2:
-#    console:
-#      enabled: true
-#      path: /h2
-#
-#  output:
-#    ansi:
-#      enabled: always
 
 worldcup:
   start-date-time: '2022-11-14 15:00:00+00'
